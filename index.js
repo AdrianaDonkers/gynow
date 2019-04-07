@@ -140,6 +140,8 @@ function initialize() {
 
                     //Anchor the center of the icon image to the coordinate.
                     anchor: 'center',
+										
+										size: 0.3,
 
                     //Allow the icons to overlap.
                     allowOverlap: true
