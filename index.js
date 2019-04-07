@@ -88,7 +88,267 @@ function initialize() {
       //Load all the store data now that the data source is defined.
       loadStoreData();
 
+            //Create a bubble layer to render clustered data points.
+      var clusterBubbleLayer = new atlas.layer.BubbleLayer(datasource, null, {
+          radius: 12,
+          color: '#007faa',
+          strokeColor: 'white',
+          strokeWidth: 2,
+          filter: ['has', 'point_count'] //Only render data points that have a point_count property; clusters have this property.
+      });
+
+      //Create a symbol layer to render the count of locations in a cluster.
+      var clusterLabelLayer = new atlas.layer.SymbolLayer(datasource, null, {
+          iconOptions: {
+              image: 'none' //Hide the icon image.
+          },
+
+          textOptions: {
+              textField: '{point_count_abbreviated}',
+              size: 12,
+              font: ['StandardFont-Bold'],
+              offset: [0, 0.4],
+              color: 'white'
+          }
+      });
+
+      map.layers.add([clusterBubbleLayer, clusterLabelLayer]);
+
+      //Load a custom image icon into the map resources.
+      map.imageSprite.add('myCustomIcon', iconImageUrl).then(function() {
+
+      //Create a layer to render a coffee cup symbol above each bubble for an individual location.
+      iconLayer = new atlas.layer.SymbolLayer(datasource, null, {
+          iconOptions: {
+              //Pass in the ID of the custom icon that was loaded into the map resources.
+              image: 'myCustomIcon',
+
+              //Optionally, scale the size of the icon.
+              font: ['SegoeUi-Bold'],
+
+              //Anchor the center of the icon image to the coordinate.
+              anchor: 'center',
+
+              //Allow the icons to overlap.
+              allowOverlap: true
+          },
+
+          filter: ['!', ['has', 'point_count']] //Filter out clustered points from this layer.
+      });
+
+      map.layers.add(iconLayer);
+
+      //When the mouse is over the cluster and icon layers, change the cursor to a pointer.
+      map.events.add('mouseover', [clusterBubbleLayer, iconLayer], function() {
+          map.getCanvasContainer().style.cursor = 'pointer';
+      });
+
+      //When the mouse leaves the item on the cluster and icon layers, change the cursor back to the default (grab).
+      map.events.add('mouseout', [clusterBubbleLayer, iconLayer], function() {
+          map.getCanvasContainer().style.cursor = 'grab';
+      });
+
+      //Add a click event to the cluster layer. When the user selects a cluster, zoom into it by two levels.
+      map.events.add('click', clusterBubbleLayer, function(e) {
+          map.setCamera({
+              center: e.position,
+              zoom: map.getCamera().zoom + 2
+          });
+      });
+
+      //Add a click event to the icon layer and show the shape that was selected.
+      map.events.add('click', iconLayer, function(e) {
+          showPopup(e.shapes[0]);
+      });
+
+      //Add an event to monitor when the map is finished rendering the map after it has moved.
+      map.events.add('render', function() {
+          //Update the data in the list.
+          updateListItems();
+      });
+
     });
+}
+
+function loadStoreData() {
+
+//Download the store location data.
+fetch(storeLocationDataUrl)
+    .then(response => response.text())
+    .then(function(text) {
+
+        //Parse the tab-delimited file data into GeoJSON features.
+        var features = [];
+
+        //Split the lines of the file.
+        var lines = text.split('\n');
+
+        //Grab the header row.
+        var row = lines[0].split('\t');
+
+        //Parse the header row and index each column to make the code for parsing each row easier to follow.
+        var header = {};
+        var numColumns = row.length;
+        for (var i = 0; i < row.length; i++) {
+            header[row[i]] = i;
+        }
+
+        //Skip the header row and then parse each row into a GeoJSON feature.
+        for (var i = 1; i < lines.length; i++) {
+            row = lines[i].split('\t');
+
+            //Ensure that the row has the correct number of columns.
+            if (row.length >= numColumns) {
+
+                features.push(new atlas.data.Feature(new atlas.data.Point([parseFloat(row[header['Longitude']]), parseFloat(row[header['Latitude']])]), {
+                    AddressLine: row[header['AddressLine']],
+                    City: row[header['City']],
+                    AdminDivision: row[header['AdminDivision']],
+                    Country: row[header['Country']],
+                    PostCode: row[header['PostCode']],
+                    Phone: row[header['Phone']],
+                    // Opens: parseInt(row[header['Opens']]),
+                    // Closes: parseInt(row[header['Closes']])
+                }));
+            }
+        }
+
+        //Add the features to the data source.
+        datasource.add(new atlas.data.FeatureCollection(features));
+
+        //Initially, update the list items.
+        updateListItems();
+    });
+}
+
+var listItemTemplate = '<div class="listItem" onclick="itemSelected(\'{id}\')"><div class="listItem-title">{title}</div>{city}<br />Open until {closes}<br />{distance} miles away</div>';
+
+function updateListItems() {
+    //Hide the center marker.
+    centerMarker.setOptions({
+        visible: false
+    });
+
+    //Get the current camera and view information for the map.
+    var camera = map.getCamera();
+    var listPanel = document.getElementById('listPanel');
+
+    //Get all the shapes that have been rendered in the bubble layer.
+    var data = map.layers.getRenderedShapes(map.getCamera().bounds, [iconLayer]);
+
+    data.forEach(function(shape) {
+        if (shape instanceof atlas.Shape) {
+            //Calculate the distance from the center of the map to each shape, and then store the data in a distance property.
+            shape.distance = atlas.math.getDistanceTo(camera.center, shape.getCoordinates(), 'miles');
+        }
+    });
+
+    //Sort the data by distance.
+    data.sort(function(x, y) {
+        return x.distance - y.distance;
+    });
+
+    //Check to see whether the user is zoomed out a substantial distance. If they are, tell the user to zoom in and to perform a search or select the My Location button.
+    if (camera.zoom < maxClusterZoomLevel) {
+        //Close the pop-up window; clusters might be displayed on the map.
+        popup.close();
+        listPanel.innerHTML = '<div class="statusMessage">Search for a location, zoom the map, or select the My Location button to see individual locations.</div>';
+    } else {
+        //Update the location of the centerMarker property.
+        centerMarker.setOptions({
+            position: camera.center,
+            visible: true
+        });
+
+        //List the ten closest locations in the side panel.
+        var html = [], properties;
+
+        /*
+        Generating HTML for each item that looks like this:
+        <div class="listItem" onclick="itemSelected('id')">
+            <div class="listItem-title">1 Microsoft Way</div>
+            Redmond, WA 98052<br />
+            Open until 9:00 PM<br />
+            0.7 miles away
+        </div>
+        */
+
+        data.forEach(function(shape) {
+            properties = shape.getProperties();
+            html.push('<div class="listItem" onclick="itemSelected(\'', shape.getId(), '\')"><div class="listItem-title">',
+            properties['AddressLine'],
+            '</div>',
+            //Get a formatted addressLine2 value that consists of City, Municipality, AdminDivision, and PostCode.
+            getAddressLine2(properties),
+            '<br />',
+
+            //Convert the closing time to a format that is easier to read.
+            getOpenTillTime(properties),
+            '<br />',
+
+            //Route the distance to two decimal places.
+            (Math.round(shape.distance * 100) / 100),
+            ' miles away</div>');
+        });
+
+        listPanel.innerHTML = html.join('');
+
+        //Scroll to the top of the list panel in case the user has scrolled down.
+        listPanel.scrollTop = 0;
+    }
+}
+
+//This converts a time that's in a 24-hour format to an AM/PM time or noon/midnight string.
+function getOpenTillTime(properties) {
+    var time = properties['Closes'];
+    var t = time / 100;
+    var sTime;
+
+    if (time === 1200) {
+        sTime = 'noon';
+    } else if (time === 0 || time === 2400) {
+        sTime = 'midnight';
+    } else {
+        sTime = Math.round(t) + ':';
+
+        //Get the minutes.
+        t = (t - Math.round(t)) * 100;
+
+        if (t === 0) {
+            sTime += '00';
+        } else if (t < 10) {
+            sTime += '0' + t;
+        } else {
+            sTime += Math.round(t);
+        }
+
+        if (time < 1200) {
+            sTime += ' AM';
+        } else {
+            sTime += ' PM';
+        }
+    }
+
+    return 'Open until ' + sTime;
+}
+
+//Create an addressLine2 string that contains City, Municipality, AdminDivision, and PostCode.
+function getAddressLine2(properties) {
+    var html = [properties['City']];
+
+    if (properties['Municipality']) {
+        html.push(', ', properties['Municipality']);
+    }
+
+    if (properties['AdminDivision']) {
+        html.push(', ', properties['AdminDivision']);
+    }
+
+    if (properties['PostCode']) {
+        html.push(' ', properties['PostCode']);
+    }
+
+    return html.join('');
 }
 
 //Create an array of country ISO 2 values to limit searches to.
