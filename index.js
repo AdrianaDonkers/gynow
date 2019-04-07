@@ -397,9 +397,9 @@ function showPopup(shape) {
     var html = ['<div class="storePopup">'];
 
     html.push('<div class="popupTitle">',
-        properties['AddressLine'],
+        properties['Name'],
         '<div class="popupSubTitle">',
-        getAddressLine2(properties),
+        properties['AddressLine'],
         '</div></div><div class="popupContent">',
 
         //Convert the closing time into a nicely formated time.
