@@ -1,5 +1,4 @@
 ---
-topic: Node.js Hello World
 languages:
   - javascript
 products:
@@ -29,3 +28,6 @@ Gynow is a user interactive app that allows users to be anonymous. It caters tow
 
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## What we learned
+This has been our entire team's first exposure to using Azure as a tool for API integration. We integrated a mapping API in order to bring our vision to life, and we also implemented a significant amount of HTML, CSS, and JavaScript. 
