@@ -171,6 +171,7 @@ function initialize() {
             //Add an event to monitor when the map is finished rendering the map after it has moved.
             map.events.add('render', function () {
                 //Update the data in the list.
+<<<<<<< Updated upstream
                 //updateListItems();
                 //Hide the center marker.
                 centerMarker.setOptions({
@@ -246,6 +247,9 @@ function initialize() {
                     //Scroll to the top of the list panel in case the user has scrolled down.
                     listPanel.scrollTop = 0;
                 }
+=======
+                updateListItems();
+>>>>>>> Stashed changes
             });
         });
     });
@@ -303,6 +307,7 @@ function loadStoreData() {
             datasource.add(new atlas.data.FeatureCollection(features));
 
             //Initially, update the list items.
+<<<<<<< Updated upstream
             //updateListItems();
             //function updateListItems() {
             //Hide the center marker.
@@ -382,85 +387,88 @@ function loadStoreData() {
             }
             //}
 
+=======
+            updateListItems();
+>>>>>>> Stashed changes
         });
 }
 
-// function updateListItems() {
-//     //Hide the center marker.
-//     centerMarker.setOptions({
-//         visible: false
-//     });
+function updateListItems() {
+    //Hide the center marker.
+    centerMarker.setOptions({
+        visible: false
+    });
 
-//     //Get the current camera and view information for the map.
-//     var camera = map.getCamera();
-//     var listPanel = document.getElementById('listPanel');
+    //Get the current camera and view information for the map.
+    var camera = map.getCamera();
+    var listPanel = document.getElementById('listPanel');
 
-//     //Get all the shapes that have been rendered in the bubble layer.
-//     // console.log(iconLayer.bbox);
-//     console.log(map.layers[0].bbox);
-//     var data = map.layers.getRenderedShapes(map.getCamera().bounds, [iconLayer]);
+    //Get all the shapes that have been rendered in the bubble layer.
+    console.log(iconLayer.bbox);
+    console.log(map.layers[0].bbox);
+    var data = map.layers.getRenderedShapes(map.getCamera().bounds, [iconLayer]);
 
-//     data.forEach(function (shape) {
-//         if (shape instanceof atlas.Shape) {
-//             //Calculate the distance from the center of the map to each shape, and then store the data in a distance property.
-//             shape.distance = atlas.math.getDistanceTo(camera.center, shape.getCoordinates(), 'miles');
-//         }
-//     });
+    data.forEach(function (shape) {
+        if (shape instanceof atlas.Shape) {
+            //Calculate the distance from the center of the map to each shape, and then store the data in a distance property.
+            shape.distance = atlas.math.getDistanceTo(camera.center, shape.getCoordinates(), 'miles');
+        }
+    });
 
-//     //Sort the data by distance.
-//     data.sort(function (x, y) {
-//         return x.distance - y.distance;
-//     });
+    //Sort the data by distance.
+    data.sort(function (x, y) {
+        return x.distance - y.distance;
+    });
 
-//     //Check to see whether the user is zoomed out a substantial distance. If they are, tell the user to zoom in and to perform a search or select the My Location button.
-//     if (camera.zoom < maxClusterZoomLevel) {
-//         //Close the pop-up window; clusters might be displayed on the map.
-//         popup.close();
-//         listPanel.innerHTML = '<div class="statusMessage">Search for a location, zoom the map, or select the My Location button to see individual locations.</div>';
-//     } else {
-//         //Update the location of the centerMarker property.
-//         centerMarker.setOptions({
-//             position: camera.center,
-//             visible: true
-//         });
+    //Check to see whether the user is zoomed out a substantial distance. If they are, tell the user to zoom in and to perform a search or select the My Location button.
+    if (camera.zoom < maxClusterZoomLevel) {
+        //Close the pop-up window; clusters might be displayed on the map.
+        popup.close();
+        listPanel.innerHTML = '<div class="statusMessage">Search for a location, zoom the map, or select the My Location button to see individual locations.</div>';
+    } else {
+        //Update the location of the centerMarker property.
+        centerMarker.setOptions({
+            position: camera.center,
+            visible: true
+        });
 
-//         //List the ten closest locations in the side panel.
-//         var html = [], properties;
+        //List the ten closest locations in the side panel.
+        var html = [], properties;
 
-//         /*
-//         Generating HTML for each item that looks like this:
-//         <div class="listItem" onclick="itemSelected('id')">
-//             <div class="listItem-title">1 Microsoft Way</div>
-//             Redmond, WA 98052<br />
-//             Open until 9:00 PM<br />
-//             0.7 miles away
-//         </div>
-//         */
+        /*
+        Generating HTML for each item that looks like this:
+        <div class="listItem" onclick="itemSelected('id')">
+            <div class="listItem-title">1 Microsoft Way</div>
+            Redmond, WA 98052<br />
+            Open until 9:00 PM<br />
+            0.7 miles away
+        </div>
+        */
 
-//         data.forEach(function (shape) {
-//             properties = shape.getProperties();
-//             html.push('<div class="listItem" onclick="itemSelected(\'', shape.getId(), '\')"><div class="listItem-title">',
-//                 properties['AddressLine'],
-//                 '</div>',
-//                 //Get a formatted addressLine2 value that consists of City, Municipality, AdminDivision, and PostCode.
-//                 getAddressLine2(properties),
-//                 '<br />',
+        data.forEach(function (shape) {
+            properties = shape.getProperties();
+            html.push('<div class="listItem" onclick="itemSelected(\'', shape.getId(), '\')"><div class="listItem-title">',
+                properties['AddressLine'],
+                '</div>',
+                //Get a formatted addressLine2 value that consists of City, Municipality, AdminDivision, and PostCode.
+                getAddressLine2(properties),
+                '<br />',
 
-//                 //Convert the closing time to a format that is easier to read.
-//                 getOpenTillTime(properties),
-//                 '<br />',
+                //Convert the closing time to a format that is easier to read.
+                getOpenTillTime(properties),
+                '<br />',
 
-//                 //Route the distance to two decimal places.
-//                 (Math.round(shape.distance * 100) / 100),
-//                 ' miles away</div>');
-//         });
+                //Route the distance to two decimal places.
+                (Math.round(shape.distance * 100) / 100),
+                ' miles away</div>');
+        });
 
-//         listPanel.innerHTML = html.join('');
+        listPanel.innerHTML = html.join('');
 
-//         //Scroll to the top of the list panel in case the user has scrolled down.
-//         listPanel.scrollTop = 0;
-//     }
-// }
+        //Scroll to the top of the list panel in case the user has scrolled down.
+        listPanel.scrollTop = 0;
+    }
+}
 
 //This converts a time that's in a 24-hour format to an AM/PM time or noon/midnight string.
 function getOpenTillTime(properties) {
