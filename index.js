@@ -202,7 +202,7 @@ function loadStoreData() {
             for (var i = 0; i < row.length; i++) {
                 console.log("row's length is: " + i);
                 header[row[i]] = i;
-                console.log("header is: " + header);
+                console.log("header is: " + header[row[i]]);
             }
 
             //Skip the header row and then parse each row into a GeoJSON feature.
@@ -244,6 +244,7 @@ function updateListItems() {
     var listPanel = document.getElementById('listPanel');
 
     //Get all the shapes that have been rendered in the bubble layer.
+    console.log(iconLayer.bbox);
     var data = map.layers.getRenderedShapes(map.getCamera().bounds, [iconLayer]);
 
     data.forEach(function (shape) {
