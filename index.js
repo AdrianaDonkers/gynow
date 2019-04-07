@@ -18,7 +18,7 @@ var centerLocationDataUrl = 'data/HealthCareProviders.txt';
 var listItemTemplate = '<div class="listItem" onclick="itemSelected(\'{id}\')"><div class="listItem-title">{title}</div>{city}<br />Open until {closes}<br />{distance} miles away</div>';
 
 //Create an array of country ISO 2 values to limit searches to.
-var countrySet = ['USA'];
+var countrySet = ['US'];
 
 //The URL to the icon image.
 var iconImageUrl = 'images/gynow_heart.png';
