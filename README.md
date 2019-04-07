@@ -20,9 +20,9 @@ Gynow is a web app that links users to healthcare centers such as Planned Parent
 Our idea is eventually to have this app be linked to a transportation service, such as Lyft, for users to find quick ways to reach the care they need. We understand that not everyone is able to afford personal rides to their destination, so we want to offer alternative public transportation routes to healthcare centers. The intuition behind this is wanting to make this kind of healthcare more accessible to people of all income brackets. Users will also have the opportunity to view ratings of the facilities by other users.
 
 ## Here is what we plan for Gynow’s user interface:
-![image1]()
+![image1](/images/proto2.png)
 As we expand our project, we would like to add a homepage with options to connect with specialists, learn more about Gynow, and navigate to the map page. Our homepage would look like this:
-![image2]()
+![image2](/images/proto1.png)
 
 ## What makes Gynow special?:
 Gynow is a user interactive app that allows users to be anonymous. It caters towards women who are looking for specific types of healthcare, and it tells users what they can find for immediate attention. It also provides a safe space in which women can read ratings from people who have had similar experiences and intentions as them. This builds a community of trust, empowerment, support, and health.
