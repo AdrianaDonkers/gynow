@@ -17,7 +17,7 @@ var maxClusterZoomLevel = 11;
 var storeLocationDataUrl = 'data/HealthCareProviders.txt';
 
 //The URL to the icon image.
-var iconImageUrl = 'images/CoffeeIcon.png';
+var iconImageUrl = 'images/gynow_heart.png';
 var map, popup, datasource, iconLayer, centerMarker, searchURL;
 
 function initialize() {
