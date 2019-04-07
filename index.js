@@ -24,7 +24,7 @@ var providerSet = ['Hollywood Health Center', 'Marina OBGYN', 'UCLA Rape Treatme
                    'Plaza Towers OBGYN', 'Claris Health', 'Dorothy Hecht Health Center', 
                    'Cedars-Sinai OBGYN', 'Bixby Health Center', 'Planned Parenthood of Baldwin Hills', 
                    'Planned Parenthood of Crenshaw', 'Planned Parenthood of Baldwin Hills/Crenshaw', 
-                   'East Los Angeles Health Center', ' Eagle Rock Health Center'];
+                   'East Los Angeles Health Center', 'Eagle Rock Health Center'];
 
 //The URL to the icon image.
 var iconImageUrl = 'images/gynow_heart.png';
@@ -83,7 +83,7 @@ function initialize() {
         //Add an HTML marker to the map to indicate the center to use for searching.
         centerMarker = new atlas.HtmlMarker({
             htmlContent: '<div class="mapCenterIcon"></div>',
-            position: map.getCamera().center
+            position: map.getCamera().setMapToUserLocation
         });
 
         map.markers.add(centerMarker);
