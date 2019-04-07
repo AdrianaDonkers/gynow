@@ -1,11 +1,11 @@
 Name	AddressLine	City	AdminDivision	Country	PostCode	Latitude	Longitude	Phone	Opens	Closes
 Hollywood Health Center	1014 1/2 N Vermont Ave	Los Angeles	CA	US	90029	34.090141	-118.291157	(800)576-5544	700	1700
-Marina OB/GYN	4560 Admiralty Way #105	Marina Del Rey	CA	US	90292	34.58575	-118.26292	(424) 204-8997	700	1700
+Marina OB/GYN	4560 Admiralty Way #105	Marina Del Rey	CA	US	90292	34.08575	-118.26292	(424) 204-8997	700	1700
 UCLA Rape Treatment Center	1250 16th St	Santa Monica	CA	US	90404	34.01373	-118.29113	(424) 259-7208	2400	2400
-Plaza Towers OBGYN	8601 Lincoln Blvd #160	Westchester	CA	US	90045	34.57342	-118.25108	(310) 424-3434	700	1700
+Plaza Towers OBGYN	8601 Lincoln Blvd #160	Westchester	CA	US	90045	34.07342	-118.25108	(310) 424-3434	700	1700
 Claris Health	575 E Hardy St #109	Inglewood	CA	US	90301	34.9494	-118.3477	(323) 299-9977	900	1700
-Dorothy Hecht Health Center	8520 So. Broadway	Los Angeles	CA	US	90003	34.57395	-118.16412	(800)576-5544	800	1700
-Cedars-Sinai OB-GYN	12746 W Jefferson Blvd F4	Playa Vista	CA	US	90094	34.5839	-118.25021	(310) 423-7788	1200	2100
+Dorothy Hecht Health Center	8520 So. Broadway	Los Angeles	CA	US	90003	34.07395	-118.16412	(800)576-5544	800	1700
+Cedars-Sinai OB-GYN	12746 W Jefferson Blvd F4	Playa Vista	CA	US	90094	34.0839	-118.25021	(310) 423-7788	1200	2100
 Bixby Health Center	1057 Kingston Avenue	Los Angeles	CA	US	90033	34.03259	-118.12353	(800) 576-5544	830	1630
 Planned Parenthood of Baldwin Hills/Crenshaw	3637 S. La Brea Ave	Los Angeles	CA	US	90016	34.01146	-118.2122	(800)576-5544	800	1700
 East Los Angeles Health Center	5068 Whittier Blvd.	Los Angeles	CA	US	90022	34.0115	-118.09375	(800)576-5544	800	1700
