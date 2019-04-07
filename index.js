@@ -20,6 +20,12 @@ var centerLocationDataUrl = 'data/HealthCareProviders.txt';
 //Create an array of country ISO 2 values to limit searches to.
 var countrySet = ['US'];
 
+var providerSet = ['Hollywood Health Center', 'Marina OBGYN', 'UCLA Rape Treatment Center', 
+                   'Plaza Towers OBGYN', 'Claris Health', 'Dorothy Hecht Health Center', 
+                   'Cedars-Sinai OBGYN', 'Bixby Health Center', 'Planned Parenthood of Baldwin Hills', 
+                   'Planned Parenthood of Crenshaw', 'Planned Parenthood of Baldwin Hills/Crenshaw', 
+                   'East Los Angeles Health Center', ' Eagle Rock Health Center'];
+
 //The URL to the icon image.
 var iconImageUrl = 'images/gynow_heart.png';
 var map, popup, datasource, iconLayer, centerMarker, searchURL;
@@ -470,7 +476,7 @@ function performSearch() {
     //Perform a fuzzy search on the users query.
     searchURL.searchFuzzy(atlas.service.Aborter.timeout(3000), query, {
         //Pass in the array of country ISO2 for which we want to limit the search to.
-        countrySet: countrySet
+        providerSet: providerSet
     }).then(results => {
         //Parse the response into GeoJSON so that the map can understand.
         var data = results.geojson.getFeatures();
