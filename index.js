@@ -309,7 +309,7 @@ function updateListItems() {
                 '<br />',
 
                 //Convert the closing time to a format that is easier to read.
-                getOpenTillTime(properties),
+                getOpenTime(properties),
                 '<br />',
 
                 //Route the distance to two decimal places.
@@ -325,8 +325,44 @@ function updateListItems() {
 }
 
 //This converts a time that's in a 24-hour format to an AM/PM time or noon/midnight string.
-function getOpenTillTime(properties) {
-    var time = properties['Closes'];
+function getOpenTime(properties) {
+    var time = properties['Opens'];
+    console.log(time);
+    var t = time / 100;
+    var sTime;
+
+    if (time === 1200) {
+        sTime = 'noon';
+    } else if (time === 0 || time === 2400) {
+        sTime = 'midnight';
+    } else {
+        sTime = Math.round(t).toString() + ':';
+
+        //Get the minutes.
+        t = (t - Math.round(t)) * 100;
+
+        if (t === 0) {
+            sTime += '00';
+        } else if (t < 10) {
+            sTime += '0' + t.toString();
+        } else {
+            sTime += Math.round(t).toString();
+        }
+
+        if (time < 1200) {
+            sTime += ' AM';
+        } else {
+            sTime += ' PM';
+        }
+    }
+    console.log(sTime);
+
+    return 'Opens at ' + sTime;
+}
+
+//This converts a time that's in a 24-hour format to an AM/PM time or noon/midnight string.
+function getOpenTime(properties) {
+    var time = properties['Opens'];
     console.log(time);
     var t = time / 100;
     var sTime;
