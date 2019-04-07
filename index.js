@@ -447,10 +447,13 @@ function showPopup(shape) {
         getAddressLine2(properties),
         '</div></div><div class="popupContent">',
 
+        properties['AddressLine'],
+
+
         //Convert the closing time into a nicely formated time.
         '<br>',
 				getOpenTime(properties),
-				'<br>',
+                '<br>',
         // '<br>',
         // properties['Opens'],
         // '<br>',
@@ -462,7 +465,8 @@ function showPopup(shape) {
         properties['Phone'],
         '">', 
         properties['Phone'],
-        '</a>'
+        '</a>',
+        '</div>'
     );
 /*
     if (properties['IsWiFiHotSpot'] || properties['IsWheelchairAccessible']) {
