@@ -88,8 +88,8 @@ html, body {
  }
 
  #myLocationBtn, #searchBtn {
-	 	 box-shadow: 0px 0px 4px rgba(0,0,0,0.16);
-     margin: 0;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.16);
+     margin-top: 0;
      padding: 0;
      border: none;
      border-collapse: collapse;
@@ -107,7 +107,7 @@ html, body {
 
  #myLocationBtn {
      position: absolute;
-     top: 200px;
+     top: 250px;
      left: 20px;
      background-image: url("images/you_are_here.png");
  }

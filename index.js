@@ -15,7 +15,7 @@ var maxClusterZoomLevel = 11;
 
 //The URL to the store location data.
 var centerLocationDataUrl = 'data/HealthCareProviders.txt';
-var listItemTemplate = '<div class="listItem" onclick="itemSelected(\'{id}\')"><div class="listItem-title">{title}</div>{city}<br />Open until {closes}<br />{distance} miles away</div>';
+//var listItemTemplate = '<div class="listItem" onclick="itemSelected(\'{id}\')"><div class="listItem-title">{title}</div>{city}<br />Open until {closes}<br />{distance} miles away</div>';
 
 //Create an array of country ISO 2 values to limit searches to.
 var countrySet = ['US'];
@@ -244,8 +244,8 @@ function updateListItems() {
     var listPanel = document.getElementById('listPanel');
 
     //Get all the shapes that have been rendered in the bubble layer.
-    console.log(iconLayer.bbox);
-    console.log(map.layers[0].bbox);
+    //console.log(iconLayer.bbox);
+    //console.log(map.layers[0].bbox);
     var data = map.layers.getRenderedShapes(map.getCamera().bounds, [iconLayer]);
 
     data.forEach(function (shape) {
@@ -313,6 +313,7 @@ function updateListItems() {
 //This converts a time that's in a 24-hour format to an AM/PM time or noon/midnight string.
 function getOpenTillTime(properties) {
     var time = properties['Closes'];
+    console.log(time);
     var t = time / 100;
     var sTime;
 
@@ -321,7 +322,7 @@ function getOpenTillTime(properties) {
     } else if (time === 0 || time === 2400) {
         sTime = 'midnight';
     } else {
-        sTime = Math.round(t) + ':';
+        sTime = Math.round(t).toString() + ':';
 
         //Get the minutes.
         t = (t - Math.round(t)) * 100;
@@ -329,9 +330,9 @@ function getOpenTillTime(properties) {
         if (t === 0) {
             sTime += '00';
         } else if (t < 10) {
-            sTime += '0' + t;
+            sTime += '0' + t.toString();
         } else {
-            sTime += Math.round(t);
+            sTime += Math.round(t).toString();
         }
 
         if (time < 1200) {
@@ -340,6 +341,7 @@ function getOpenTillTime(properties) {
             sTime += ' PM';
         }
     }
+    console.log(sTime);
 
     return 'Open until ' + sTime;
 }
@@ -407,7 +409,7 @@ function showPopup(shape) {
         properties['Phone'],
         '</a>'
     );
-
+/*
     if (properties['IsWiFiHotSpot'] || properties['IsWheelchairAccessible']) {
         html.push('<br/>Amenities: ');
 
@@ -419,7 +421,7 @@ function showPopup(shape) {
             html.push('<img src="images/WheelChair-small.png" title="Wheelchair Accessible"/>')
         }
     }
-
+*/
     html.push('</div></div>');
 
     //Update the content and position of the popup for the specified shape information.
