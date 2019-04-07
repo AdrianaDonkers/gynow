@@ -81,12 +81,12 @@ function initialize() {
         });
 
         //Add an HTML marker to the map to indicate the center to use for searching.
-        centerMarker = new atlas.HtmlMarker({
-            htmlContent: '<div class="mapCenterIcon"></div>',
-            position: map.getCamera().setMapToUserLocation
-        });
+        // centerMarker = new atlas.HtmlMarker({
+        //     htmlContent: '<div class="mapCenterIcon"></div>',
+        //     position: [position.coords.longitude, position.coords.latitude]
+        // });
 
-        map.markers.add(centerMarker);
+        // map.markers.add(centerMarker);
 
         //Create a data source, add it to the map, and then enable clustering.
         datasource = new atlas.source.DataSource(null, {
@@ -244,9 +244,9 @@ function loadStoreData() {
 
 function updateListItems() {
     //Hide the center marker.
-    centerMarker.setOptions({
-        visible: false
-    });
+    // centerMarker.setOptions({
+    //     visible: false
+    // });
 
     //Get the current camera and view information for the map.
     var camera = map.getCamera();
@@ -276,10 +276,10 @@ function updateListItems() {
         listPanel.innerHTML = '<div class="statusMessage">Search for a location, zoom the map, or select the My Location button to see individual locations.</div>';
     } else {
         //Update the location of the centerMarker property.
-        centerMarker.setOptions({
-            position: camera.center,
-            visible: true
-        });
+        // centerMarker.setOptions({
+        //     position: camera.center,
+        //     visible: true
+        // });
 
         //List the ten closest locations in the side panel.
         var html = [], properties;
@@ -540,6 +540,13 @@ function setMapToUserLocation() {
             center: [position.coords.longitude, position.coords.latitude],
             zoom: maxClusterZoomLevel + 1
         });
+        centerMarker = new atlas.HtmlMarker({
+            htmlContent: '<div class="mapCenterIcon"></div>',
+            position: [position.coords.longitude, position.coords.latitude]
+        });
+
+        map.markers.add(centerMarker);
+
     }, function (error) {
         //If an error occurs when the API tries to access the user's position information, display an error message.
         switch (error.code) {
