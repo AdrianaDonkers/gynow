@@ -200,6 +200,7 @@ function loadStoreData() {
             var header = {};
             var numColumns = row.length;
             for (var i = 0; i < row.length; i++) {
+                console.log("row's length is: " + i);
                 header[row[i]] = i;
                 console.log("header is: " + header);
             }
