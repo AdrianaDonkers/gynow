@@ -170,6 +170,7 @@ function initialize() {
     });
 }
 
+
 function loadStoreData() {
 
 //Download the store location data.
@@ -207,8 +208,8 @@ fetch(storeLocationDataUrl)
                     Country: row[header['Country']],
                     PostCode: row[header['PostCode']],
                     Phone: row[header['Phone']],
-                    // Opens: parseInt(row[header['Opens']]),
-                    // Closes: parseInt(row[header['Closes']])
+                    Opens: parseInt(row[header['Opens']]),
+                    Closes: parseInt(row[header['Closes']])
                 }));
             }
         }
