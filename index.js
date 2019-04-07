@@ -33,7 +33,7 @@ var map, popup, datasource, iconLayer, centerMarker, searchURL;
 function initialize() {
     //Initialize a map instance.
     map = new atlas.Map('myMap', {
-        center: [34, -118],
+        //center: [34, -118],
         zoom: 2,
         style: 'road',
 
@@ -43,7 +43,7 @@ function initialize() {
             subscriptionKey: '5S4l4D76x5CUADU8f6F3PDm4e_-5W01imvbcz0Uj85c'
         }
     });
-		setMapToUserLocation;
+		setMapToUserLocation();
 
     //Create a pop-up window, but leave it closed so we can update it and display it later.
     popup = new atlas.Popup();
