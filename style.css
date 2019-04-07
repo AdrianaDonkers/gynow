@@ -72,14 +72,14 @@ html, body {
      width: 300px;
  }
 
-/*  #listPanel {
+#listPanel {
      position: absolute;
      top: 135px;
      left: 0px;
      width: 350px;
      height: calc(100vh - 135px);
      overflow-y: auto;
- } */
+ }
 
  #myMap { 
      position: absolute;
@@ -142,7 +142,7 @@ html, body {
     top: 475px;
     left: 40px;
  }
-/* 
+
  .listItem {
      height: 50px;
      padding: 20px;
@@ -157,7 +157,7 @@ html, body {
  .listItem-title {
      color: #007faa;
      font-weight: bold;
- } */
+ }
 
  .storePopup {
      min-width: 150px;
