@@ -60,12 +60,12 @@ function initialize() {
     searchURL = new atlas.service.SearchURL(pipeline);
 
     //If the user selects the search button, geocode the value the user passed in.
-    document.getElementById('searchBtn').onclick = setMapToUserLocation;
+    document.getElementById('searchBtn').onclick = performSearch;
 
     //If the user presses Enter in the search box, perform a search.
     document.getElementById('searchTbx').onkeyup = function (e) {
         if (e.keyCode === 13) {
-            setMapToUserLocation();
+            performSearch();
         }
     };
 
