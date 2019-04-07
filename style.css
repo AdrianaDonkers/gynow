@@ -37,7 +37,7 @@ html, body {
  }
 
  .searchPanel input {
-     width: 100%;
+     width: calc(100% - 50px);
      font-size: 16px;
      border: 0;
      border-bottom: 1px solid #ccc;
@@ -82,6 +82,7 @@ html, body {
  } */
 
  #myMap { 
+     position: absolute;
      top: 150px;
      left: 350px;
      width: calc(100vw - 350px);
@@ -99,7 +100,7 @@ html, body {
  #myLocationBtn, #searchBtn {
     box-shadow: 0px 0px 4px rgba(0,0,0,0.16);
      margin-top: 0;
-     padding: 10px;
+     padding: 0;
      border: none;
      border-collapse: collapse;
      width: 32px;
@@ -115,8 +116,8 @@ html, body {
  }
 
  #myLocationBtn {
-     position: relative;
-     top: -50px;
+     position: absolute;
+     top: 425px;
      left: 250px;
      background-image: url("images/you_are_here.png");
  }
@@ -126,8 +127,8 @@ html, body {
  }
 
  #searchBtn {
-    position: relative;
-    top: 30px;
+    position: absolute;
+    top: 475px;
     left: 250px;
      background-image: url("images/search_icon.png");
  }
@@ -137,13 +138,12 @@ html, body {
  }
 
  #searchTbx{
-    position: relative;
-    top: 100%;
-    left: 20px;
-    margin-bottom: 30px;
+    position: absolute;
+    top: 475px;
+    left: 40px;
  }
-
-/*  .listItem {
+/* 
+ .listItem {
      height: 50px;
      padding: 20px;
      font-size: 14px;
@@ -197,12 +197,12 @@ html, body {
          width: 100vw;
      }
 
-/*      #listPanel {
+     #listPanel {
          top: 385px;
          width: 100%;
          height: calc(100vh - 385px);
          padding: 5px;
-     } */
+     }
 
      #myMap {
          width: 100vw;
@@ -212,11 +212,7 @@ html, body {
      }
 
      #myLocationBtn {
-         top: -50px;
-     }
-     
-     #searchBtn {
-         top: 30px;
+         top: 220px;
      }
  }
 
