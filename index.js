@@ -362,7 +362,7 @@ function getOpenTime(properties) {
 
 //This converts a time that's in a 24-hour format to an AM/PM time or noon/midnight string.
 function getOpenTime(properties) {
-    var time = properties['Closes'];
+    var time = properties['Opens'];
     console.log(time);
     var t = time / 100;
     var sTime;
