@@ -522,7 +522,7 @@ function performSearch() {
     //Perform a fuzzy search on the users query.
     searchURL.searchFuzzy(atlas.service.Aborter.timeout(3000), query, {
         //Pass in the array of country ISO2 for which we want to limit the search to.
-        providerSet: providerSet
+        query: providerSet[0]
     }).then(results => {
         //Parse the response into GeoJSON so that the map can understand.
         var data = results.geojson.getFeatures();
