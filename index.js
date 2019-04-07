@@ -15,7 +15,7 @@ var maxClusterZoomLevel = 11;
 
 //The URL to the store location data.
 var centerLocationDataUrl = 'data/HealthCareProviders.txt';
-var listItemTemplate = '<div class="listItem" onclick="itemSelected(\'{id}\')"><div class="listItem-title">{title}</div>{city}<br />Open until {closes}<br />{distance} miles away</div>';
+//var listItemTemplate = '<div class="listItem" onclick="itemSelected(\'{id}\')"><div class="listItem-title">{title}</div>{city}<br />Open until {closes}<br />{distance} miles away</div>';
 
 //Create an array of country ISO 2 values to limit searches to.
 var countrySet = ['US'];
@@ -313,6 +313,7 @@ function updateListItems() {
 //This converts a time that's in a 24-hour format to an AM/PM time or noon/midnight string.
 function getOpenTillTime(properties) {
     var time = properties['Closes'];
+		console.log("time: " time);
     var t = time / 100;
     var sTime;
 
@@ -407,7 +408,7 @@ function showPopup(shape) {
         properties['Phone'],
         '</a>'
     );
-
+/*
     if (properties['IsWiFiHotSpot'] || properties['IsWheelchairAccessible']) {
         html.push('<br/>Amenities: ');
 
@@ -419,7 +420,7 @@ function showPopup(shape) {
             html.push('<img src="images/WheelChair-small.png" title="Wheelchair Accessible"/>')
         }
     }
-
+*/
     html.push('</div></div>');
 
     //Update the content and position of the popup for the specified shape information.
