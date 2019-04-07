@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map Route</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Add references to the Azure Maps Map control JavaScript and CSS files. -->
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/css/atlas.min.css?api-version=2" type="text/css">
+    <script src="https://atlas.microsoft.com/sdk/js/atlas.min.js?api-version=2"></script>
+
+    <!-- Add a reference to the Azure Maps Services Module JavaScript file. -->
+    <script src="https://atlas.microsoft.com/sdk/js/atlas-service.js?api-version=2"></script>
+
+    <script>
+        var map, datasource, client;
+
+        function GetMap() {
+          //Instantiate a map object
+          var map = new atlas.Map("myMap", {
+              //Add your Azure Maps subscription key to the map SDK. Get an Azure Maps key at https://azure.com/maps
+              authOptions: {
+                 authType: 'subscriptionKey',
+                 subscriptionKey: '5S4l4D76x5CUADU8f6F3PDm4e_-5W01imvbcz0Uj85c'
+              }
+          });
+        }
+    </script>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        #myMap {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body onload="GetMap()">
+    <div id="myMap"></div>
+</body>
+</html>
