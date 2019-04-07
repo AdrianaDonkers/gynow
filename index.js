@@ -244,7 +244,7 @@ function updateListItems() {
     var listPanel = document.getElementById('listPanel');
 
     //Get all the shapes that have been rendered in the bubble layer.
-    console.log(iconLayer.bbox);
+    // console.log(iconLayer.bbox);
     console.log(map.layers[0].bbox);
     var data = map.layers.getRenderedShapes(map.getCamera().bounds, [iconLayer]);
 
