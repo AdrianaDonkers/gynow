@@ -222,7 +222,7 @@ function loadStoreData() {
                         Opens: parseInt(row[header['Opens']]),
                         Closes: parseInt(row[header['Closes']])
                     }));
-										console.logt(features['Closes'])
+										console.log(features['Closes'])
                 }
             }
 
