@@ -28,7 +28,7 @@ html, body {
  }
 
  .searchPanel {
-     position: relative;
+     position: sticky;
      width: 350px;
  }
 
@@ -48,6 +48,12 @@ html, body {
     width: 20%;
     padding: 5px;
   }
+  
+  /* .locationBtnDescription {
+    position: sticky;
+    top: 425px;
+    width: 350px;
+} */
 
   #logo {
     width: 8%;
@@ -111,8 +117,8 @@ html, body {
 
  #myLocationBtn {
      position: absolute;
-     top: 250px;
-     left: 20px;
+     top: 425px;
+     left: 250px;
      background-image: url("images/you_are_here.png");
  }
 
@@ -121,11 +127,20 @@ html, body {
  }
 
  #searchBtn {
+    position: absolute;
+    top: 475px;
+    left: 250px;
      background-image: url("images/search_icon.png");
  }
 
  #searchBtn:hover {
-     background-image: url("images/search_icon-hover.png") !important;
+     background-image: url("images/search_icon-hover.png");
+ }
+
+ #searchTbx{
+    position: absolute;
+    top: 475px;
+    left: 40px;
  }
 
  .listItem {
