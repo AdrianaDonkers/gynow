@@ -7,6 +7,8 @@ products:
   - Azure Web Apps
 ---
 
+![logo](gynow/images/gynow_logo.png)
+
 # Welcome to Gynow.
 
 ## Our Project
