@@ -37,7 +37,7 @@ html, body {
  }
 
  .searchPanel input {
-     width: calc(100% - 50px);
+     width: 100%;
      font-size: 16px;
      border: 0;
      border-bottom: 1px solid #ccc;
@@ -72,17 +72,16 @@ html, body {
      width: 300px;
  }
 
- #listPanel {
+/*  #listPanel {
      position: absolute;
      top: 135px;
      left: 0px;
      width: 350px;
      height: calc(100vh - 135px);
      overflow-y: auto;
- }
+ } */
 
  #myMap { 
-     position: absolute;
      top: 150px;
      left: 350px;
      width: calc(100vw - 350px);
@@ -100,7 +99,7 @@ html, body {
  #myLocationBtn, #searchBtn {
     box-shadow: 0px 0px 4px rgba(0,0,0,0.16);
      margin-top: 0;
-     padding: 0;
+     padding: 10px;
      border: none;
      border-collapse: collapse;
      width: 32px;
@@ -116,8 +115,8 @@ html, body {
  }
 
  #myLocationBtn {
-     position: absolute;
-     top: 425px;
+     position: relative;
+     top: -50px;
      left: 250px;
      background-image: url("images/you_are_here.png");
  }
@@ -127,8 +126,8 @@ html, body {
  }
 
  #searchBtn {
-    position: absolute;
-    top: 475px;
+    position: relative;
+    top: 30px;
     left: 250px;
      background-image: url("images/search_icon.png");
  }
@@ -138,12 +137,13 @@ html, body {
  }
 
  #searchTbx{
-    position: absolute;
-    top: 475px;
-    left: 40px;
+    position: relative;
+    top: 100%;
+    left: 20px;
+    margin-bottom: 30px;
  }
 
- .listItem {
+/*  .listItem {
      height: 50px;
      padding: 20px;
      font-size: 14px;
@@ -157,7 +157,7 @@ html, body {
  .listItem-title {
      color: #007faa;
      font-weight: bold;
- }
+ } */
 
  .storePopup {
      min-width: 150px;
@@ -197,12 +197,12 @@ html, body {
          width: 100vw;
      }
 
-     #listPanel {
+/*      #listPanel {
          top: 385px;
          width: 100%;
          height: calc(100vh - 385px);
          padding: 5px;
-     }
+     } */
 
      #myMap {
          width: 100vw;
@@ -212,7 +212,11 @@ html, body {
      }
 
      #myLocationBtn {
-         top: 220px;
+         top: -50px;
+     }
+     
+     #searchBtn {
+         top: 30px;
      }
  }
 
