@@ -27,8 +27,9 @@ var map, popup, datasource, iconLayer, centerMarker, searchURL;
 function initialize() {
     //Initialize a map instance.
     map = new atlas.Map('myMap', {
-        center: [-90, 40],
+        center: [34, -118],
         zoom: 2,
+        style: 'road',
 
         //Add your Azure Maps subscription key to the map SDK.
         authOptions: {
@@ -142,6 +143,7 @@ function initialize() {
             console.log("I'm here");
 
             map.layers.add(iconLayer);
+            console.log("Layers list is:" + map.layers);
 
             //When the mouse is over the cluster and icon layers, change the cursor to a pointer.
             map.events.add('mouseover', [clusterBubbleLayer, iconLayer], function () {
