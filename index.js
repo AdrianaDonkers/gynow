@@ -190,15 +190,18 @@ function loadStoreData() {
 
             //Split the lines of the file.
             var lines = text.split('\n');
+            console.log("lines are: " + lines);
 
             //Grab the header row.
             var row = lines[0].split('\t');
+            console.log("row is: " + row);
 
             //Parse the header row and index each column to make the code for parsing each row easier to follow.
             var header = {};
             var numColumns = row.length;
             for (var i = 0; i < row.length; i++) {
                 header[row[i]] = i;
+                console.log("header is: " + header);
             }
 
             //Skip the header row and then parse each row into a GeoJSON feature.

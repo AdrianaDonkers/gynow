@@ -94,6 +94,14 @@ html, body {
      background-image: url("images/you_are_here-hover.png");
  }
 
+ #logo {
+
+ }
+
+ #catchphrase {
+    height: 20px;
+ }
+
  #searchBtn {
      background-color: transparent;
      background-image: url("images/search_icon.png");
