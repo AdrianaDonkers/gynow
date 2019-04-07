@@ -116,7 +116,7 @@ html, body {
  }
 
  #myLocationBtn {
-     position: absolute;
+     position: fixed;
      top: 425px;
      left: 250px;
      background-image: url("images/you_are_here.png");
