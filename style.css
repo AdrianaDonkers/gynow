@@ -3,42 +3,41 @@ html, body {
   margin: 0;
   font-family: Gotham, Helvetica, sans-serif;
   overflow-x: hidden;
-  background: url("images/gynow_background_2.png") no-repeat !important;
+  /* background: url("images/gynow_background_2.png") no-repeat !important;
   background-repeat: no-repeat;
   position: absolute;
   /* background-size: 100% 100%; */
-  margin: inherit;
-  width: 100%;
+  /* margin: inherit;
+  width: 100%; */
   /* padding-bottom: 75%; */
-  background-position: center;
+  /* background-position: center;
   text-align: center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: cover; */ 
 }
 
 #description {
-  background: white;
+  /* background: white;
   text-align: center;
   font-family: Georgia, serif;
   margin-top: 250px;
   margin-left: 25%;
   width: inherit;
-  display: inline-block;
+  display: inline-block; */
 }
 
  header {
      width: calc(100vw - 10px);
-     height: 30px;
      padding: 15px 0 20px 20px;
      font-size: 25px;
      font-style: italic;
-     font-family: "Comic Sans MS", cursive, sans-serif;
+     font-family: "avenir next";
      line-height: 30px;
      font-weight: bold;
      color: white;
-     background-color: #007faa;
+     background-color: #020708;
  }
 
  header span {
@@ -46,7 +45,7 @@ html, body {
  }
 
  header img {
-     height: 30px;
+     height: 100px;
      vertical-align: middle;
  }
 
@@ -77,7 +76,7 @@ html, body {
 
  #myMap { 
      position: absolute;
-     top: 65px;
+     top: 150px;
      left: 350px;
      width: calc(100vw - 350px);
      height: calc(100vh - 65px);
@@ -221,4 +220,3 @@ html, body {
          box-shadow: 0 0 0 0 rgba(0, 204, 255, 0);
      }
  }
->>>>>>> bed15b7ddf69d89958be9a7f4aefa58deca54b6a:style.css

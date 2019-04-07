@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Gynow</title>
 
@@ -12,24 +13,34 @@
 
     <script src="https://atlas.microsoft.com/sdk/js/atlas-service.js?api-version=2"></script>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="images/gynow_logo.png" />
+
     <link rel="stylesheet" href="style.css" type="text/css">
     <script src="index.js"></script>
+
+
+
 </head>
+
 <body>
-	<header>
-			<img src="images/gynow_logo.png" />
-			<span>Gynow</span>
-	</header>
-   <main>
-    <div class="searchPanel">
-        <div>
-            <input id="searchTbx" type="search" placeholder="Find a healthcare provider" />
-            <button id="searchBtn" title="Search"></button>
+    <header>
+        <img src="images/gynow_logo.png" />
+    </header>
+    <main>
+        <div class="searchPanel">
+            <div>
+                <input id="searchTbx" type="search" placeholder="Find a healthcare provider" />
+                <button id="searchBtn" title="Search"></button>
+            </div>
         </div>
-    </div>
-    <div id="listPanel"></div>
-    <div id="myMap"></div>
-    <button id="myLocationBtn" title="My Location"></button>
-</main>
+        <div id="listPanel"></div>
+        <div id="myMap"></div>
+        <button id="myLocationBtn" title="My Location"></button>
+    </main>
 </body>
+
+
+
 </html>
