@@ -15,6 +15,10 @@ var maxClusterZoomLevel = 11;
 
 //The URL to the store location data.
 var storeLocationDataUrl = 'data/HealthCareProviders.txt';
+var listItemTemplate = '<div class="listItem" onclick="itemSelected(\'{id}\')"><div class="listItem-title">{title}</div>{city}<br />Open until {closes}<br />{distance} miles away</div>';
+
+//Create an array of country ISO 2 values to limit searches to.
+var countrySet = ['USA'];
 
 //The URL to the icon image.
 var iconImageUrl = 'images/gynow_heart.png';
@@ -166,7 +170,7 @@ function initialize() {
           //Update the data in the list.
           updateListItems();
       });
-
+			});
     });
 }
 
@@ -207,8 +211,8 @@ fetch(storeLocationDataUrl)
                     Country: row[header['Country']],
                     PostCode: row[header['PostCode']],
                     Phone: row[header['Phone']],
-                    // Opens: parseInt(row[header['Opens']]),
-                    // Closes: parseInt(row[header['Closes']])
+                    Opens: parseInt(row[header['Opens']]),
+                    Closes: parseInt(row[header['Closes']])
                 }));
             }
         }
@@ -220,8 +224,6 @@ fetch(storeLocationDataUrl)
         updateListItems();
     });
 }
-
-var listItemTemplate = '<div class="listItem" onclick="itemSelected(\'{id}\')"><div class="listItem-title">{title}</div>{city}<br />Open until {closes}<br />{distance} miles away</div>';
 
 function updateListItems() {
     //Hide the center marker.
@@ -350,9 +352,6 @@ function getAddressLine2(properties) {
 
     return html.join('');
 }
-
-//Create an array of country ISO 2 values to limit searches to.
-var countrySet = ['USA'];
 
 function performSearch() {
     var query = document.getElementById('searchTbx').value;
