@@ -20,8 +20,12 @@ Our idea is eventually to have this app be linked to a transportation service, s
 
 ## Here is what we plan for Gynow’s user interface:
 ![image1](/images/proto2.png)
+
 As we expand our project, we would like to add a homepage with options to connect with specialists, learn more about Gynow, and navigate to the map page. Our homepage would look like this:
+
 ![image2](/images/proto1.png)
+
+Note that currently, our healthcare center data is hardcoded and displays how our application would look if the user were to search using their currect location (at USC). All of the hearts representing healthcare centers are centered around this region. Ultimately, we would like to make this searchable for all regions in the US.
 
 ## What makes Gynow special?:
 Gynow is a user interactive app that allows users to be anonymous. It caters towards women who are looking for specific types of healthcare, and it tells users what they can find for immediate attention. It also provides a safe space in which women can read ratings from people who have had similar experiences and intentions as them. This builds a community of trust, empowerment, support, and health.
@@ -30,4 +34,4 @@ Gynow is a user interactive app that allows users to be anonymous. It caters tow
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## What we learned
-This has been our entire team's first exposure to using Azure as a tool for API integration. We integrated a mapping API in order to bring our vision to life, and we also implemented a significant amount of HTML, CSS, and JavaScript. 
+This has been our entire team's first exposure to using Azure as a tool for API integration. We integrated the SimpleStoreLocator Azure Maps feature in order to bring our vision to life. We also implemented a significant amount of HTML, CSS, and JavaScript. This was half of our group's first experience creating a web application, both front-end and back-end, so they had the chance to see how these elements come together to produce an entire application. Our team looks forward to using these new skills and appreciates the opportunity to work with the Microsoft Azure platform.
