@@ -295,7 +295,7 @@ function updateListItems() {
                 '</div>',
                 
                 '<div>',
-                properties['Name'],
+                properties['AddressLine'],
                 '</div>',
                 //Get a formatted addressLine2 value that consists of City, Municipality, AdminDivision, and PostCode.
                 getAddressLine2(properties),
