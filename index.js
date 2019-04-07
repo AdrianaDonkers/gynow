@@ -288,6 +288,11 @@ function updateListItems() {
         data.forEach(function (shape) {
             properties = shape.getProperties();
             html.push('<div class="listItem" onclick="itemSelected(\'', shape.getId(), '\')"><div class="listItem-title">',
+                properties['Name'],
+
+                '</div>',
+                
+                '<div>',
                 properties['AddressLine'],
                 '</div>',
                 //Get a formatted addressLine2 value that consists of City, Municipality, AdminDivision, and PostCode.
