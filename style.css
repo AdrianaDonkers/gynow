@@ -15,6 +15,7 @@ html, body {
      font-weight: bold;
      color: white;
      background-color: #020708;
+     position: sticky;
  }
 
  header span {
@@ -42,6 +43,25 @@ html, body {
      border-bottom: 1px solid #ccc;
  }
 
+ .column {
+    float: left;
+    width: 20%;
+    padding: 5px;
+  }
+
+  #logo {
+    width: 8%;
+    position: sticky;
+
+ }
+
+ #catchphrase {
+    width: 23%;
+    height: 100%;
+    position: sticky;
+
+ }
+
  #listPanel {
      position: absolute;
      top: 135px;
@@ -57,6 +77,8 @@ html, body {
      left: 350px;
      width: calc(100vw - 350px);
      height: calc(100vh - 65px);
+     position: sticky;
+
  }
 
  .statusMessage {
@@ -92,14 +114,6 @@ html, body {
 
  #myLocationBtn:hover {
      background-image: url("images/you_are_here-hover.png");
- }
-
- /* #logo {
-
- } */
-
- #catchphrase {
-    height: 20px;
  }
 
  #searchBtn {

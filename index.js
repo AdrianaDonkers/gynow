@@ -15,7 +15,7 @@ var maxClusterZoomLevel = 11;
 
 //The URL to the store location data.
 var centerLocationDataUrl = 'data/HealthCareProviders.txt';
-var listItemTemplate = '<div class="listItem" onclick="itemSelected(\'{id}\')"><div class="listItem-title">{title}</div>{city}<br />Open until {closes}<br />{distance} miles away</div>';
+//var listItemTemplate = '<div class="listItem" onclick="itemSelected(\'{id}\')"><div class="listItem-title">{title}</div>{city}<br />Open until {closes}<br />{distance} miles away</div>';
 
 //Create an array of country ISO 2 values to limit searches to.
 var countrySet = ['US'];
@@ -412,7 +412,7 @@ function showPopup(shape) {
         properties['Phone'],
         '</a>'
     );
-
+/*
     if (properties['IsWiFiHotSpot'] || properties['IsWheelchairAccessible']) {
         html.push('<br/>Amenities: ');
 
@@ -424,7 +424,7 @@ function showPopup(shape) {
             html.push('<img src="images/WheelChair-small.png" title="Wheelchair Accessible"/>')
         }
     }
-
+*/
     html.push('</div></div>');
 
     //Update the content and position of the popup for the specified shape information.
