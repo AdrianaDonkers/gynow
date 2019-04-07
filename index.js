@@ -213,6 +213,7 @@ function loadStoreData() {
                 if (row.length >= numColumns) {
 
                     features.push(new atlas.data.Feature(new atlas.data.Point([parseFloat(row[header['Longitude']]), parseFloat(row[header['Latitude']])]), {
+                        Name: row[header['Name']],
                         AddressLine: row[header['AddressLine']],
                         City: row[header['City']],
                         AdminDivision: row[header['AdminDivision']],
@@ -293,7 +294,7 @@ function updateListItems() {
                 '</div>',
                 
                 '<div>',
-                properties['AddressLine'],
+                properties['Name'],
                 '</div>',
                 //Get a formatted addressLine2 value that consists of City, Municipality, AdminDivision, and PostCode.
                 getAddressLine2(properties),
@@ -399,7 +400,7 @@ function showPopup(shape) {
     html.push('<div class="popupTitle">',
         properties['Name'],
         '<div class="popupSubTitle">',
-        properties['AddressLine'],
+        getAddressLine2(properties),
         '</div></div><div class="popupContent">',
 
         //Convert the closing time into a nicely formated time.
