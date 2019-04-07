@@ -244,8 +244,8 @@ function updateListItems() {
     var listPanel = document.getElementById('listPanel');
 
     //Get all the shapes that have been rendered in the bubble layer.
-    console.log(iconLayer.bbox);
-    console.log(map.layers[0].bbox);
+    //console.log(iconLayer.bbox);
+    //console.log(map.layers[0].bbox);
     var data = map.layers.getRenderedShapes(map.getCamera().bounds, [iconLayer]);
 
     data.forEach(function (shape) {
@@ -313,6 +313,7 @@ function updateListItems() {
 //This converts a time that's in a 24-hour format to an AM/PM time or noon/midnight string.
 function getOpenTillTime(properties) {
     var time = properties['Closes'];
+    console.log(time);
     var t = time / 100;
     var sTime;
 
@@ -340,6 +341,7 @@ function getOpenTillTime(properties) {
             sTime += ' PM';
         }
     }
+    console.log(sTime);
 
     return 'Open until ' + sTime;
 }
