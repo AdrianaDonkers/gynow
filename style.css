@@ -83,8 +83,8 @@ html, body {
 
  #myLocationBtn {
      position: absolute;
-     top: 150px;
-     right: 10px;
+     top: 200px;
+     left: 20px;
      box-shadow: 0px 0px 4px rgba(0,0,0,0.16);
      background-color: white;
      background-image: url("images/you_are_here.png");
