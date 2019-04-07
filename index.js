@@ -289,6 +289,11 @@ function updateListItems() {
         data.forEach(function (shape) {
             properties = shape.getProperties();
             html.push('<div class="listItem" onclick="itemSelected(\'', shape.getId(), '\')"><div class="listItem-title">',
+                properties['Name'],
+
+                '</div>',
+                
+                '<div>',
                 properties['AddressLine'],
                 '</div>',
                 //Get a formatted addressLine2 value that consists of City, Municipality, AdminDivision, and PostCode.
@@ -393,9 +398,9 @@ function showPopup(shape) {
     var html = ['<div class="storePopup">'];
 
     html.push('<div class="popupTitle">',
-        properties['AddressLine'],
+        properties['Name'],
         '<div class="popupSubTitle">',
-        getAddressLine2(properties),
+        properties['AddressLine'],
         '</div></div><div class="popupContent">',
 
         //Convert the closing time into a nicely formated time.
