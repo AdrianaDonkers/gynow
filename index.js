@@ -171,85 +171,7 @@ function initialize() {
             //Add an event to monitor when the map is finished rendering the map after it has moved.
             map.events.add('render', function () {
                 //Update the data in the list.
-<<<<<<< Updated upstream
-                //updateListItems();
-                //Hide the center marker.
-                centerMarker.setOptions({
-                    visible: false
-                });
-
-                //Get the current camera and view information for the map.
-                var camera = map.getCamera();
-                var listPanel = document.getElementById('listPanel');
-
-                //Get all the shapes that have been rendered in the bubble layer.
-                // console.log(iconLayer.bbox);
-                console.log(map.layers[0].bbox);
-                var data = map.layers.getRenderedShapes(map.getCamera().bounds, [iconLayer]);
-
-                data.forEach(function (shape) {
-                    if (shape instanceof atlas.Shape) {
-                        //Calculate the distance from the center of the map to each shape, and then store the data in a distance property.
-                        shape.distance = atlas.math.getDistanceTo(camera.center, shape.getCoordinates(), 'miles');
-                    }
-                });
-
-                //Sort the data by distance.
-                data.sort(function (x, y) {
-                    return x.distance - y.distance;
-                });
-
-                //Check to see whether the user is zoomed out a substantial distance. If they are, tell the user to zoom in and to perform a search or select the My Location button.
-                if (camera.zoom < maxClusterZoomLevel) {
-                    //Close the pop-up window; clusters might be displayed on the map.
-                    popup.close();
-                    listPanel.innerHTML = '<div class="statusMessage">Search for a location, zoom the map, or select the My Location button to see individual locations.</div>';
-                } else {
-                    //Update the location of the centerMarker property.
-                    centerMarker.setOptions({
-                        position: camera.center,
-                        visible: true
-                    });
-
-                    //List the ten closest locations in the side panel.
-                    var html = [], properties;
-
-                    /*
-                    Generating HTML for each item that looks like this:
-                    <div class="listItem" onclick="itemSelected('id')">
-                        <div class="listItem-title">1 Microsoft Way</div>
-                        Redmond, WA 98052<br />
-                        Open until 9:00 PM<br />
-                        0.7 miles away
-                    </div>
-                    */
-
-                    data.forEach(function (shape) {
-                        properties = shape.getProperties();
-                        html.push('<div class="listItem" onclick="itemSelected(\'', shape.getId(), '\')"><div class="listItem-title">',
-                            properties['AddressLine'],
-                            '</div>',
-                            //Get a formatted addressLine2 value that consists of City, Municipality, AdminDivision, and PostCode.
-                            getAddressLine2(properties),
-                            '<br />',
-
-                            //Convert the closing time to a format that is easier to read.
-                            getOpenTillTime(properties),
-                            '<br />',
-
-                            //Route the distance to two decimal places.
-                            (Math.round(shape.distance * 100) / 100),
-                            ' miles away</div>');
-                    });
-
-                    listPanel.innerHTML = html.join('');
-
-                    //Scroll to the top of the list panel in case the user has scrolled down.
-                    listPanel.scrollTop = 0;
-                }
-=======
                 updateListItems();
->>>>>>> Stashed changes
             });
         });
     });
@@ -307,89 +229,7 @@ function loadStoreData() {
             datasource.add(new atlas.data.FeatureCollection(features));
 
             //Initially, update the list items.
-<<<<<<< Updated upstream
-            //updateListItems();
-            //function updateListItems() {
-            //Hide the center marker.
-            centerMarker.setOptions({
-                visible: false
-
-            });
-
-            //Get the current camera and view information for the map.
-            var camera = map.getCamera();
-            var listPanel = document.getElementById('listPanel');
-
-            //Get all the shapes that have been rendered in the bubble layer.
-            // console.log(iconLayer.bbox);
-            console.log(map.layers[0].bbox);
-            var data = map.layers.getRenderedShapes(map.getCamera().bounds, [iconLayer]);
-
-            data.forEach(function (shape) {
-                if (shape instanceof atlas.Shape) {
-                    //Calculate the distance from the center of the map to each shape, and then store the data in a distance property.
-                    shape.distance = atlas.math.getDistanceTo(camera.center, shape.getCoordinates(), 'miles');
-                }
-            });
-
-            //Sort the data by distance.
-            data.sort(function (x, y) {
-                return x.distance - y.distance;
-            });
-
-            //Check to see whether the user is zoomed out a substantial distance. If they are, tell the user to zoom in and to perform a search or select the My Location button.
-            if (camera.zoom < maxClusterZoomLevel) {
-                //Close the pop-up window; clusters might be displayed on the map.
-                popup.close();
-                listPanel.innerHTML = '<div class="statusMessage">Search for a location, zoom the map, or select the My Location button to see individual locations.</div>';
-            } else {
-                //Update the location of the centerMarker property.
-                centerMarker.setOptions({
-                    position: camera.center,
-                    visible: true
-                });
-
-                //List the ten closest locations in the side panel.
-                var html = [], properties;
-
-                /*
-                Generating HTML for each item that looks like this:
-                <div class="listItem" onclick="itemSelected('id')">
-                    <div class="listItem-title">1 Microsoft Way</div>
-                    Redmond, WA 98052<br />
-                    Open until 9:00 PM<br />
-                    0.7 miles away
-                </div>
-                */
-
-                data.forEach(function (shape) {
-                    properties = shape.getProperties();
-                    html.push('<div class="listItem" onclick="itemSelected(\'', shape.getId(), '\')"><div class="listItem-title">',
-                        properties['AddressLine'],
-                        '</div>',
-                        //Get a formatted addressLine2 value that consists of City, Municipality, AdminDivision, and PostCode.
-                        getAddressLine2(properties),
-                        '<br />',
-
-                        //Convert the closing time to a format that is easier to read.
-                        getOpenTillTime(properties),
-                        '<br />',
-
-                        //Route the distance to two decimal places.
-                        (Math.round(shape.distance * 100) / 100),
-                        ' miles away</div>');
-                });
-
-                listPanel.innerHTML = html.join('');
-
-                //Scroll to the top of the list panel in case the user has scrolled down.
-                listPanel.scrollTop = 0;
-            }
-            //}
-
-=======
             updateListItems();
->>>>>>> Stashed changes
         });
 }
 
@@ -502,6 +342,95 @@ function getOpenTillTime(properties) {
     }
 
     return 'Open until ' + sTime;
+}
+
+//When a user clicks on a result in the side panel, look up the shape by its id value and show popup.
+function itemSelected(id) {
+    //Get the shape from the data source using it's id. 
+    var shape = datasource.getShapeById(id);
+    showPopup(shape);
+
+    //Center the map over the shape on the map.
+    var center = shape.getCoordinates();
+    var offset;
+
+    //If the map is less than 700 pixels wide, then the layout is set for small screens.
+    if (map.getCanvas().width < 700) {
+        //When the map is small, offset the center of the map relative to the shape so that there is room for the popup to appear.
+        offset = [0, -80];
+    }
+
+    map.setCamera({
+        center: center,
+        centerOffset: offset
+    });
+}
+
+function showPopup(shape) {
+    var properties = shape.getProperties();
+
+    /*
+        Generating HTML for the popup that looks like this:
+         <div class="storePopup">
+                <div class="popupTitle">
+                    3159 Tongass Avenue
+                    <div class="popupSubTitle">Ketchikan, AK 99901</div>
+                </div>
+                <div class="popupContent">
+                    Open until 22:00 PM<br/>
+                    <img title="Phone Icon" src="images/PhoneIcon.png">
+                    <a href="tel:1-800-XXX-XXXX">1-800-XXX-XXXX</a>
+                    <br>Amenities:
+                    <img title="Wi-Fi Hotspot" src="images/WiFiIcon.png">
+                    <img title="Wheelchair Accessible" src="images/WheelChair-small.png">
+                </div>
+            </div>
+     */
+
+    var html = ['<div class="storePopup">'];
+
+    html.push('<div class="popupTitle">',
+        properties['AddressLine'],
+        '<div class="popupSubTitle">',
+        getAddressLine2(properties),
+        '</div></div><div class="popupContent">',
+
+        //Convert the closing time into a nicely formated time.
+        getOpenTillTime(properties),
+
+        //Route the distance to 2 decimal places. 
+        '<br/>', (Math.round(shape.distance * 100) / 100),
+        ' miles away',
+        '<br /><img src="images/PhoneIcon.png" title="Phone Icon"/><a href="tel:',
+        properties['Phone'],
+        '">', 
+        properties['Phone'],
+        '</a>'
+    );
+
+    if (properties['IsWiFiHotSpot'] || properties['IsWheelchairAccessible']) {
+        html.push('<br/>Amenities: ');
+
+        if (properties['IsWiFiHotSpot']) {
+            html.push('<img src="images/WiFiIcon.png" title="Wi-Fi Hotspot"/>')
+        }
+
+        if (properties['IsWheelchairAccessible']) {
+            html.push('<img src="images/WheelChair-small.png" title="Wheelchair Accessible"/>')
+        }
+    }
+
+    html.push('</div></div>');
+
+    //Update the content and position of the popup for the specified shape information.
+    popup.setOptions({
+        //Create a table from the properties in the feature.
+        content:  html.join(''),
+        position: shape.getCoordinates()
+    });
+
+    //Open the popup.
+    popup.open(map);
 }
 
 //Create an addressLine2 string that contains City, Municipality, AdminDivision, and PostCode.
