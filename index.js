@@ -321,7 +321,7 @@ function getOpenTillTime(properties) {
     } else if (time === 0 || time === 2400) {
         sTime = 'midnight';
     } else {
-        sTime = Math.round(t) + ':';
+        sTime = Math.round(t).toString() + ':';
 
         //Get the minutes.
         t = (t - Math.round(t)) * 100;
@@ -329,9 +329,9 @@ function getOpenTillTime(properties) {
         if (t === 0) {
             sTime += '00';
         } else if (t < 10) {
-            sTime += '0' + t;
+            sTime += '0' + t.toString();
         } else {
-            sTime += Math.round(t);
+            sTime += Math.round(t).toString();
         }
 
         if (time < 1200) {
