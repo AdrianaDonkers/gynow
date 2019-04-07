@@ -14,7 +14,7 @@
 var maxClusterZoomLevel = 11;
 
 //The URL to the store location data.
-var storeLocationDataUrl = 'data/HealthCareProviders.txt';
+var centerLocationDataUrl = 'data/HealthCareProviders.txt';
 var listItemTemplate = '<div class="listItem" onclick="itemSelected(\'{id}\')"><div class="listItem-title">{title}</div>{city}<br />Open until {closes}<br />{distance} miles away</div>';
 
 //Create an array of country ISO 2 values to limit searches to.
@@ -181,7 +181,7 @@ function initialize() {
 function loadStoreData() {
 
     //Download the store location data.
-    fetch(storeLocationDataUrl)
+    fetch(centerLocationDataUrl)
         .then(response => response.text())
         .then(function (text) {
 
@@ -341,10 +341,10 @@ function getOpenTillTime(properties) {
 //Create an addressLine2 string that contains City, Municipality, AdminDivision, and PostCode.
 function getAddressLine2(properties) {
     var html = [properties['City']];
-
-    if (properties['Municipality']) {
-        html.push(', ', properties['Municipality']);
-    }
+    /*
+        if (properties['Municipality']) {
+            html.push(', ', properties['Municipality']);
+        }*/
 
     if (properties['AdminDivision']) {
         html.push(', ', properties['AdminDivision']);
