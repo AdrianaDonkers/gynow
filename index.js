@@ -449,7 +449,7 @@ function showPopup(shape) {
 
         //Convert the closing time into a nicely formated time.
         '<br>',
-				getOpenTillTime(properties),
+				getOpenTime(properties),
 				'<br>',
         // '<br>',
         // properties['Opens'],
