@@ -405,7 +405,7 @@ function showPopup(shape) {
         //Convert the closing time into a nicely formated time.
         //getOpenTillTime(properties),
         '<br>',
-        properties['Closes'],
+        typeof(properties['Closes']),
         '<br>',
 
         //Route the distance to 2 decimal places. 
