@@ -55,7 +55,7 @@ function initialize() {
     document.getElementById('searchBtn').onclick = performSearch;
 
     //If the user presses Enter in the search box, perform a search.
-    document.getElementById('searchTbx').onkeyup = function(e) {
+    document.getElementById('searchTbx').onkeyup = function (e) {
         if (e.keyCode === 13) {
             performSearch();
         }
@@ -65,165 +65,166 @@ function initialize() {
     document.getElementById('myLocationBtn').onclick = setMapToUserLocation;
 
     //Wait until the map resources are ready.
-    map.events.add('ready', function() {
+    map.events.add('ready', function () {
 
-   		//Add your post-map load functionality.
-      //Add a zoom control to the map.
-      map.controls.add(new atlas.control.ZoomControl(), {
-        position: 'top-right'
-      });
+        //Add your post-map load functionality.
+        //Add a zoom control to the map.
+        map.controls.add(new atlas.control.ZoomControl(), {
+            position: 'top-right'
+        });
 
-  //Add an HTML marker to the map to indicate the center to use for searching.
-      centerMarker = new atlas.HtmlMarker({
-        htmlContent: '<div class="mapCenterIcon"></div>',
-        position: map.getCamera().center
-      });
+        //Add an HTML marker to the map to indicate the center to use for searching.
+        centerMarker = new atlas.HtmlMarker({
+            htmlContent: '<div class="mapCenterIcon"></div>',
+            position: map.getCamera().center
+        });
 
-      map.markers.add(centerMarker);
+        map.markers.add(centerMarker);
 
-      //Create a data source, add it to the map, and then enable clustering.
-      datasource = new atlas.source.DataSource(null, {
-          cluster: true,
-          clusterMaxZoom: maxClusterZoomLevel - 1
-      });
+        //Create a data source, add it to the map, and then enable clustering.
+        datasource = new atlas.source.DataSource(null, {
+            cluster: true,
+            clusterMaxZoom: maxClusterZoomLevel - 1
+        });
 
-      map.sources.add(datasource);
+        map.sources.add(datasource);
 
-      //Load all the store data now that the data source is defined.
-      loadStoreData();
+        //Load all the store data now that the data source is defined.
+        loadStoreData();
 
-            //Create a bubble layer to render clustered data points.
-      var clusterBubbleLayer = new atlas.layer.BubbleLayer(datasource, null, {
-          radius: 12,
-          color: '#007faa',
-          strokeColor: 'white',
-          strokeWidth: 2,
-          filter: ['has', 'point_count'] //Only render data points that have a point_count property; clusters have this property.
-      });
+        //Create a bubble layer to render clustered data points.
+        var clusterBubbleLayer = new atlas.layer.BubbleLayer(datasource, null, {
+            radius: 12,
+            color: '#007faa',
+            strokeColor: 'white',
+            strokeWidth: 2,
+            filter: ['has', 'point_count'] //Only render data points that have a point_count property; clusters have this property.
+        });
 
-      //Create a symbol layer to render the count of locations in a cluster.
-      var clusterLabelLayer = new atlas.layer.SymbolLayer(datasource, null, {
-          iconOptions: {
-              image: 'none' //Hide the icon image.
-          },
+        //Create a symbol layer to render the count of locations in a cluster.
+        var clusterLabelLayer = new atlas.layer.SymbolLayer(datasource, null, {
+            iconOptions: {
+                image: 'none' //Hide the icon image.
+            },
 
-          textOptions: {
-              textField: '{point_count_abbreviated}',
-              size: 12,
-              font: ['StandardFont-Bold'],
-              offset: [0, 0.4],
-              color: 'white'
-          }
-      });
+            textOptions: {
+                textField: '{point_count_abbreviated}',
+                size: 12,
+                font: ['StandardFont-Bold'],
+                offset: [0, 0.4],
+                color: 'white'
+            }
+        });
 
-      map.layers.add([clusterBubbleLayer, clusterLabelLayer]);
+        map.layers.add([clusterBubbleLayer, clusterLabelLayer]);
 
-      //Load a custom image icon into the map resources.
-      map.imageSprite.add('myCustomIcon', iconImageUrl).then(function() {
+        //Load a custom image icon into the map resources.
+        map.imageSprite.add('myCustomIcon', iconImageUrl).then(function () {
 
-      //Create a layer to render a coffee cup symbol above each bubble for an individual location.
-      iconLayer = new atlas.layer.SymbolLayer(datasource, null, {
-          iconOptions: {
-              //Pass in the ID of the custom icon that was loaded into the map resources.
-              image: 'myCustomIcon',
+            //Create a layer to render a heart symbol above each bubble for an individual location.
+            iconLayer = new atlas.layer.SymbolLayer(datasource, null, {
+                iconOptions: {
+                    //Pass in the ID of the custom icon that was loaded into the map resources.
+                    image: 'myCustomIcon',
 
-              //Optionally, scale the size of the icon.
-              font: ['SegoeUi-Bold'],
+                    //Optionally, scale the size of the icon.
+                    font: ['SegoeUi-Bold'],
 
-              //Anchor the center of the icon image to the coordinate.
-              anchor: 'center',
+                    //Anchor the center of the icon image to the coordinate.
+                    anchor: 'center',
 
-              //Allow the icons to overlap.
-              allowOverlap: true
-          },
+                    //Allow the icons to overlap.
+                    allowOverlap: true
+                },
 
-          filter: ['!', ['has', 'point_count']] //Filter out clustered points from this layer.
-      });
+                filter: ['!', ['has', 'point_count']] //Filter out clustered points from this layer.
+            });
+            console.log("I'm here");
 
-      map.layers.add(iconLayer);
+            map.layers.add(iconLayer);
 
-      //When the mouse is over the cluster and icon layers, change the cursor to a pointer.
-      map.events.add('mouseover', [clusterBubbleLayer, iconLayer], function() {
-          map.getCanvasContainer().style.cursor = 'pointer';
-      });
+            //When the mouse is over the cluster and icon layers, change the cursor to a pointer.
+            map.events.add('mouseover', [clusterBubbleLayer, iconLayer], function () {
+                map.getCanvasContainer().style.cursor = 'pointer';
+            });
 
-      //When the mouse leaves the item on the cluster and icon layers, change the cursor back to the default (grab).
-      map.events.add('mouseout', [clusterBubbleLayer, iconLayer], function() {
-          map.getCanvasContainer().style.cursor = 'grab';
-      });
+            //When the mouse leaves the item on the cluster and icon layers, change the cursor back to the default (grab).
+            map.events.add('mouseout', [clusterBubbleLayer, iconLayer], function () {
+                map.getCanvasContainer().style.cursor = 'grab';
+            });
 
-      //Add a click event to the cluster layer. When the user selects a cluster, zoom into it by two levels.
-      map.events.add('click', clusterBubbleLayer, function(e) {
-          map.setCamera({
-              center: e.position,
-              zoom: map.getCamera().zoom + 2
-          });
-      });
+            //Add a click event to the cluster layer. When the user selects a cluster, zoom into it by two levels.
+            map.events.add('click', clusterBubbleLayer, function (e) {
+                map.setCamera({
+                    center: e.position,
+                    zoom: map.getCamera().zoom + 2
+                });
+            });
 
-      //Add a click event to the icon layer and show the shape that was selected.
-      map.events.add('click', iconLayer, function(e) {
-          showPopup(e.shapes[0]);
-      });
+            //Add a click event to the icon layer and show the shape that was selected.
+            map.events.add('click', iconLayer, function (e) {
+                showPopup(e.shapes[0]);
+            });
 
-      //Add an event to monitor when the map is finished rendering the map after it has moved.
-      map.events.add('render', function() {
-          //Update the data in the list.
-          updateListItems();
-      });
-			});
+            //Add an event to monitor when the map is finished rendering the map after it has moved.
+            map.events.add('render', function () {
+                //Update the data in the list.
+                updateListItems();
+            });
+        });
     });
 }
 
 
 function loadStoreData() {
 
-//Download the store location data.
-fetch(storeLocationDataUrl)
-    .then(response => response.text())
-    .then(function(text) {
+    //Download the store location data.
+    fetch(storeLocationDataUrl)
+        .then(response => response.text())
+        .then(function (text) {
 
-        //Parse the tab-delimited file data into GeoJSON features.
-        var features = [];
+            //Parse the tab-delimited file data into GeoJSON features.
+            var features = [];
 
-        //Split the lines of the file.
-        var lines = text.split('\n');
+            //Split the lines of the file.
+            var lines = text.split('\n');
 
-        //Grab the header row.
-        var row = lines[0].split('\t');
+            //Grab the header row.
+            var row = lines[0].split('\t');
 
-        //Parse the header row and index each column to make the code for parsing each row easier to follow.
-        var header = {};
-        var numColumns = row.length;
-        for (var i = 0; i < row.length; i++) {
-            header[row[i]] = i;
-        }
-
-        //Skip the header row and then parse each row into a GeoJSON feature.
-        for (var i = 1; i < lines.length; i++) {
-            row = lines[i].split('\t');
-
-            //Ensure that the row has the correct number of columns.
-            if (row.length >= numColumns) {
-
-                features.push(new atlas.data.Feature(new atlas.data.Point([parseFloat(row[header['Longitude']]), parseFloat(row[header['Latitude']])]), {
-                    AddressLine: row[header['AddressLine']],
-                    City: row[header['City']],
-                    AdminDivision: row[header['AdminDivision']],
-                    Country: row[header['Country']],
-                    PostCode: row[header['PostCode']],
-                    Phone: row[header['Phone']],
-                    Opens: parseInt(row[header['Opens']]),
-                    Closes: parseInt(row[header['Closes']])
-                }));
+            //Parse the header row and index each column to make the code for parsing each row easier to follow.
+            var header = {};
+            var numColumns = row.length;
+            for (var i = 0; i < row.length; i++) {
+                header[row[i]] = i;
             }
-        }
 
-        //Add the features to the data source.
-        datasource.add(new atlas.data.FeatureCollection(features));
+            //Skip the header row and then parse each row into a GeoJSON feature.
+            for (var i = 1; i < lines.length; i++) {
+                row = lines[i].split('\t');
 
-        //Initially, update the list items.
-        updateListItems();
-    });
+                //Ensure that the row has the correct number of columns.
+                if (row.length >= numColumns) {
+
+                    features.push(new atlas.data.Feature(new atlas.data.Point([parseFloat(row[header['Longitude']]), parseFloat(row[header['Latitude']])]), {
+                        AddressLine: row[header['AddressLine']],
+                        City: row[header['City']],
+                        AdminDivision: row[header['AdminDivision']],
+                        Country: row[header['Country']],
+                        PostCode: row[header['PostCode']],
+                        Phone: row[header['Phone']],
+                        Opens: parseInt(row[header['Opens']]),
+                        Closes: parseInt(row[header['Closes']])
+                    }));
+                }
+            }
+
+            //Add the features to the data source.
+            datasource.add(new atlas.data.FeatureCollection(features));
+
+            //Initially, update the list items.
+            updateListItems();
+        });
 }
 
 function updateListItems() {
@@ -239,7 +240,7 @@ function updateListItems() {
     //Get all the shapes that have been rendered in the bubble layer.
     var data = map.layers.getRenderedShapes(map.getCamera().bounds, [iconLayer]);
 
-    data.forEach(function(shape) {
+    data.forEach(function (shape) {
         if (shape instanceof atlas.Shape) {
             //Calculate the distance from the center of the map to each shape, and then store the data in a distance property.
             shape.distance = atlas.math.getDistanceTo(camera.center, shape.getCoordinates(), 'miles');
@@ -247,7 +248,7 @@ function updateListItems() {
     });
 
     //Sort the data by distance.
-    data.sort(function(x, y) {
+    data.sort(function (x, y) {
         return x.distance - y.distance;
     });
 
@@ -276,22 +277,22 @@ function updateListItems() {
         </div>
         */
 
-        data.forEach(function(shape) {
+        data.forEach(function (shape) {
             properties = shape.getProperties();
             html.push('<div class="listItem" onclick="itemSelected(\'', shape.getId(), '\')"><div class="listItem-title">',
-            properties['AddressLine'],
-            '</div>',
-            //Get a formatted addressLine2 value that consists of City, Municipality, AdminDivision, and PostCode.
-            getAddressLine2(properties),
-            '<br />',
+                properties['AddressLine'],
+                '</div>',
+                //Get a formatted addressLine2 value that consists of City, Municipality, AdminDivision, and PostCode.
+                getAddressLine2(properties),
+                '<br />',
 
-            //Convert the closing time to a format that is easier to read.
-            getOpenTillTime(properties),
-            '<br />',
+                //Convert the closing time to a format that is easier to read.
+                getOpenTillTime(properties),
+                '<br />',
 
-            //Route the distance to two decimal places.
-            (Math.round(shape.distance * 100) / 100),
-            ' miles away</div>');
+                //Route the distance to two decimal places.
+                (Math.round(shape.distance * 100) / 100),
+                ' miles away</div>');
         });
 
         listPanel.innerHTML = html.join('');
@@ -379,13 +380,13 @@ function performSearch() {
 
 function setMapToUserLocation() {
     //Request the user's location.
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition(function (position) {
         //Convert the Geolocation API position to a longitude and latitude position value that the map can interpret and center the map over it.
         map.setCamera({
             center: [position.coords.longitude, position.coords.latitude],
             zoom: maxClusterZoomLevel + 1
         });
-    }, function(error) {
+    }, function (error) {
         //If an error occurs when the API tries to access the user's position information, display an error message.
         switch (error.code) {
             case error.PERMISSION_DENIED:
