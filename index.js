@@ -43,6 +43,7 @@ function initialize() {
             subscriptionKey: '5S4l4D76x5CUADU8f6F3PDm4e_-5W01imvbcz0Uj85c'
         }
     });
+		setMapToUserLocation;
 
     //Create a pop-up window, but leave it closed so we can update it and display it later.
     popup = new atlas.Popup();
