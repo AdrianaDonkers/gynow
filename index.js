@@ -140,7 +140,6 @@ function initialize() {
 
                 filter: ['!', ['has', 'point_count']] //Filter out clustered points from this layer.
             });
-            console.log("I'm here");
 
             map.layers.add(iconLayer);
             console.log("Layers list is:" + map.layers);
@@ -198,7 +197,7 @@ function loadStoreData() {
 
             //Parse the header row and index each column to make the code for parsing each row easier to follow.
             var header = {};
-            var numColumns = row.length;
+            var numColumns = row.length; //11
             for (var i = 0; i < row.length; i++) {
                 console.log("row's length is: " + i);
                 header[row[i]] = i;
@@ -223,7 +222,9 @@ function loadStoreData() {
                         Opens: parseInt(row[header['Opens']]),
                         Closes: parseInt(row[header['Closes']])
                     }));
-										console.log(features['Closes'])
+										console.log("Name:" + features['Name']);
+										console.log("Opens:" + features['Opens']);
+										console.log("Closes:" + features['Closes'])
                 }
             }
 
@@ -400,15 +401,17 @@ function showPopup(shape) {
 
     html.push('<div class="popupTitle">',
         properties['Name'],
-        '</div><div class="popupContent">',
-        properties['AddressLine'],
+        '<div class="popupSubTitle">',
         getAddressLine2(properties),
+        '</div></div><div class="popupContent">',
 
         //Convert the closing time into a nicely formated time.
-        //getOpenTillTime(properties),
         '<br>',
-        properties['Opens'],
-        '<br>',
+				getOpenTillTime(properties),
+				'<br>',
+        // '<br>',
+        // properties['Opens'],
+        // '<br>',
 
         //Route the distance to 2 decimal places. 
         '<br/>', (Math.round(shape.distance * 100) / 100),
