@@ -168,6 +168,7 @@ html, body {
          top: 385px;
          width: 100%;
          height: calc(100vh - 385px);
+         padding: 5px;
      }
 
      #myMap {
