@@ -11,7 +11,7 @@ products:
 # Welcome to Gynow.
 
 ## Our Project
-One in three women in the U.S. experience sexual assault in their lifetime [(1)](https://www.nsvrc.org/statistics), one in eight women are diagnosed with breast cancer [(2)](https://ww5.komen.org/Breastcancer/Understandingrisk.html) and 80% of sexually active women are recorded to have HPV [(3)](https://my.clevelandclinic.org/health/diseases/11901-hpv-human-papilloma-virus). Our goal is to make women’s health care easy and accessible for women everywhere.
+Women regularly face challenges in finding access to easy, affordable healthcare. Over two thirds of states already report difficulty ensuring enough female healthcare providers, [(1)](https://www.istandwithpp.org/defund-defined/impact-defunding-planned-parenthood) one in three women in the U.S. experience sexual assault in their lifetime [(2)](https://www.nsvrc.org/statistics) and one in eight women are diagnosed with breast cancer [(3)](https://ww5.komen.org/Breastcancer/Understandingrisk.html). Our web app aims to make women’s health care more accessible for women everywhere. 
 
 ## What we want for our project
 Gynow is a web app that links users to healthcare centers such as Planned Parenthood, OBGYNs, etc. that are open and closest to them. Users are able to interact with a map that has hearts to mark healthcare centers in their area. They can click on a heart (representing a healthcare center) to find out details of the facility, including distance, contact information, and hours.
