@@ -398,7 +398,10 @@ function showPopup(shape) {
         '</div></div><div class="popupContent">',
 
         //Convert the closing time into a nicely formated time.
-        getOpenTillTime(properties),
+        //getOpenTillTime(properties),
+        '<br>',
+        properties['Closes'],
+        '<br>',
 
         //Route the distance to 2 decimal places. 
         '<br/>', (Math.round(shape.distance * 100) / 100),
