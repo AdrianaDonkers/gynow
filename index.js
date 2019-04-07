@@ -14,7 +14,7 @@
 var maxClusterZoomLevel = 11;
 
 //The URL to the store location data.
-var storeLocationDataUrl = 'data/ContosoCoffee.txt';
+var storeLocationDataUrl = 'data/HealthCareProviders.txt';
 
 //The URL to the icon image.
 var iconImageUrl = 'images/CoffeeIcon.png';
@@ -29,7 +29,7 @@ function initialize() {
         //Add your Azure Maps subscription key to the map SDK.
         authOptions: {
             authType: 'subscriptionKey',
-            subscriptionKey: '<Your Azure Maps Key>'
+            subscriptionKey: '5S4l4D76x5CUADU8f6F3PDm4e_-5W01imvbcz0Uj85c'
         }
     });
 
